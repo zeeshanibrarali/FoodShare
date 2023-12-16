@@ -1,14 +1,17 @@
 # FoodShare 
-bash```
-cd mern
-cd client
-npm install
+
+ 
 ```
-bash```
+cd mern
 cd server
 npm install
 ```
-bash```
-move up to the mern folder
+```
+cd client
+npm install
+```
+
+```
+mern directory
 npm start
 ```
