@@ -1,0 +1,31 @@
+.custom-main-footer{
+  background-color: #a9f3aa;
+  max-width: 100% !important;
+  margin: 0;
+  padding: 0px 28px !important;
+}
+
+h5 {
+  font-size: 1.25rem !important;
+  margin-bottom: 5px;
+}
+
+.SubscribeBtn {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  padding: 10px 30px;
+  border: 1px solid green;
+  background: transparent;
+  color: black;
+  font-size: 15px;
+  /* font-weight: 500; */
+  cursor: pointer;
+}
+
+.SubscribeBtn:hover {
+  border: 1px solid lightgreen;
+  background-color: white;
+  transition: 0.5s;
+  color: green;
+}
