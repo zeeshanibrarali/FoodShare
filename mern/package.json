@@ -9,6 +9,9 @@
     "start:client": "cd server && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.1.0"
+  },
   "author": "",
   "license": "ISC"
 }
