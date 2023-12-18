@@ -100,6 +100,27 @@ nav img {
   transition: 1s;
   color: black;
 }
+
+.logInBtn {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  padding: 10px 30px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logInBtn:hover {
+  border: 1px solid lightgreen;
+  background-color: lightgreen;
+  transition: 0.7s;
+  color: black;
+}
+
 nav .fa {
   display: none;
 }

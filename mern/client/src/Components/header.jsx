@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { brandLogo } from "../assets";
 import "../App.css"
 import MainLine from "./mainLine";
@@ -13,8 +13,9 @@ export default function header() {
                     <ul>
                         <li><a href="">HOME</a></li>
                         <li><a href="">ABOUT US</a></li>
-                        <li><a href="">MENU</a></li>
-                        <li><a href="">ABOUT US</a></li>
+                        {/* <li><a href="">MENU</a></li>
+                        <li><a href="">ABOUT US</a></li> */}
+                        <a href="" className="logInBtn">Log In</a>
                     </ul>
                 </div>
 
