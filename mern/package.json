@@ -10,7 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.1.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.1.0",
+    "concurrently": "^8.2.2",
+    "mdbreact": "^5.2.0"
   },
   "author": "",
   "license": "ISC"

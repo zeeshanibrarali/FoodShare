@@ -1,6 +1,6 @@
-import React from 'react'
+// import React from 'react'
 import { } from "./css/footer.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function footer() {
     return (
@@ -9,10 +9,10 @@ export default function footer() {
                 <footer className="py-5">
                     <div className="row">
                         <div className="col-2">
-                            <h5>Section</h5>
+                            <h5>Tabs</h5>
                             <ul className="nav flex-column">
                                 <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-muted">Home</a></li>
-                                <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-muted">Features</a></li>
+                                <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-muted">Our Partners</a></li>
                                 <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-muted">Pricing</a></li>
                                 <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-muted">FAQs</a></li>
                                 <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-muted">About</a></li>
@@ -20,7 +20,7 @@ export default function footer() {
                         </div>
 
                         <div className="col-4">
-                            <h5>Section</h5>
+                            <h5>About Us</h5>
                             <p className=' p-0'>Food Rescue is dedicated to eliminating hunger and food waste (keeping food out of landfills and reducing greenhouse gasses). We engage volunteers and food donors through our proprietary web-based app to directly transfer nutritious excess food to social service agencies serving the food insecure.</p>
                         </div>
 
@@ -29,7 +29,7 @@ export default function footer() {
                                 <h5>Subscribe to our newsletter</h5>
                                 <p>Monthly digest of whats new and exciting from us.</p>
                                 <div className="d-flex w-100 gap-2">
-                                    <label HtmlFor="newsletter1" className="visually-hidden">Email address</label>
+                                    <label htmlFor="newsletter1" className="visually-hidden">Email address</label>
                                     <input id="newsletter1" type="text" className="form-control" placeholder="Email address" />
                                     <a href="" className="SubscribeBtn">Subscribe</a>
                                 </div>
