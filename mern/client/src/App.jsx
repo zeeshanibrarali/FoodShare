@@ -4,12 +4,12 @@ import { } from "@fortawesome/free-solid-svg-icons";
 // import Header from "./Components/header";
 // import Info from "./Components/info";
 // import WhatWeDo from "./Components/WhatWeDo";
-// import Footer from "./Components/footer";
 // import SponsorLogo from "./Components/sponsorLogo";
-import Login from "./Components/login";
+// import Footer from "./Components/footer";
+// import Login from "./Components/login";
+import PersonalInfo from "./Components/Personal_Info/personal_Info";
+// import GetInTouch from "./Components/GetInTouch/GetInTouch";
 // import Dashboard from "./Components/DashBoard/dashboard";
-// import Sidebar from "./Components/DashBoard/sidebar";
-// import Login from "./Components/LoginForm/login";
 import './App.css';
 
 function App() {
@@ -22,8 +22,9 @@ function App() {
       <Info />
       <SponsorLogo />
       <Footer /> */}
-      <Login />
-      {/* <Sidebar />  */}
+      {/* <GetInTouch /> */}
+      {/* <Login /> */}
+      <PersonalInfo />
       {/* <Dashboard /> */}
     </>
   );

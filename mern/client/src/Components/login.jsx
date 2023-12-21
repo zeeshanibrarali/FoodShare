@@ -51,6 +51,13 @@ const Login = () => {
                                 <div className="btn-layer"></div>
                                 <input type="submit" value={isLogin ? 'Login' : 'Signup'} />
                             </div>
+                            <div className="signup">
+                                <div className="signup-connect">
+                                    <a href="#" className="btn btn-social btn-facebook"><i className="fa fa-facebook"></i> Sign in with Facebook</a>
+                                    <a href="#" className="btn btn-social btn-google"><i className="fa fa-google"></i> Sign in with Google</a>
+                                </div>
+                            </div>
+
                             {isLogin ? (
                                 <div className="signup-link">
                                     Not a member? <a href="#" onClick={switchToSignupFromLink}>Signup now</a>

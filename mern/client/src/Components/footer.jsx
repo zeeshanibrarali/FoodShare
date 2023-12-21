@@ -9,7 +9,7 @@ export default function footer() {
                 <footer className="py-5">
                     <div className="row">
                         <div className="col-2">
-                            <h5>Section</h5>
+                            <h5>Tabs</h5>
                             <ul className="nav flex-column">
                                 <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-muted">Home</a></li>
                                 <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-muted">Our Partners</a></li>
@@ -20,7 +20,7 @@ export default function footer() {
                         </div>
 
                         <div className="col-4">
-                            <h5>Section</h5>
+                            <h5>About Us</h5>
                             <p className=' p-0'>Food Rescue is dedicated to eliminating hunger and food waste (keeping food out of landfills and reducing greenhouse gasses). We engage volunteers and food donors through our proprietary web-based app to directly transfer nutritious excess food to social service agencies serving the food insecure.</p>
                         </div>
 
