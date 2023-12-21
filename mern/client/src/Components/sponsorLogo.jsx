@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { partner1, partner2, partner3, partner4, partner5, partner6, partner7 } from "../assets";
 import './css/sponsorLogo.css'
 

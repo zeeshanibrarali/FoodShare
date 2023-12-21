@@ -15,7 +15,7 @@ export default function header() {
                         <li><a href="">ABOUT US</a></li>
                         {/* <li><a href="">MENU</a></li>
                         <li><a href="">ABOUT US</a></li> */}
-                        <a href="" className="logInBtn">Log In</a>
+                        <a href="/login" className="logInBtn">Log In</a>
                     </ul>
                 </div>
 

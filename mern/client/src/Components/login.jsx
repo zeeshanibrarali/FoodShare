@@ -35,7 +35,7 @@ const Login = () => {
                         <div className="slider-tab"></div>
                     </div>
                     <div className="form-inner">
-                        <form action="#" className={isLogin ? 'login' : 'signup'}>
+                        <form className={isLogin ? 'login' : 'signup'}>
                             <div className="field">
                                 <input type="text" placeholder="Email Address" required />
                             </div>
@@ -53,8 +53,8 @@ const Login = () => {
                             </div>
                             <div className="signup">
                                 <div className="signup-connect">
-                                    <a href="#" className="btn btn-social btn-facebook"><i className="fa fa-facebook"></i> Sign in with Facebook</a>
-                                    <a href="#" className="btn btn-social btn-google"><i className="fa fa-google"></i> Sign in with Google</a>
+                                    <a href="/auth/facebook" className="btn btn-social btn-facebook"><i className="fa fa-facebook"></i> Sign in with Facebook</a>
+                                    <a href="/auth/google" className="btn btn-social btn-google"><i className="fa fa-google"></i> Sign in with Google</a>
                                 </div>
                             </div>
 
@@ -76,3 +76,5 @@ const Login = () => {
 };
 
 export default Login;
+
+// action={isLogin ? '../../../server/routes/authRoutes' : '/signup-endpoint'} method="POST"

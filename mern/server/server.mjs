@@ -5,6 +5,7 @@ import path from "path";
 import "./loadEnvironment.mjs";
 // import records from "./routes/record.mjs";
 import homeRoute from "./routes/homeRoute.mjs";
+import dashboardRoute from "./routes/dashboardRoute.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,6 +23,7 @@ app.use(express.json());
 
 // Use the home route for the root path ("/")
 app.use("/", homeRoute);
+app.use("/dashboard", dashboardRoute);
 
 // Start the Express server
 app.listen(PORT, () => {

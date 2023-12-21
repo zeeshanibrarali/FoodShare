@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ScrollTrigger from "react-scroll-trigger";
 import Countup from "react-countup";
 import '../App.css'
 import { donorpng } from "../assets";
 
-export default function info() {
+export default function Info() {
 
     const [CounterOn, setCounterOn] = useState(false);
 
@@ -24,7 +24,7 @@ export default function info() {
                             <div className="info-col">
                                 <img src={donorpng} alt="" />
                                 <p className='info-p'>{CounterOn && <Countup start={0} end={1000} duration={2} delay={0} />}+</p>
-                                <h3>Volunteer's</h3>
+                                <h3>Volunteers</h3>
                             </div>
                             <div className="info-col">
                                 <img src={donorpng} alt="" />

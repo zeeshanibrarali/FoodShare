@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { we_rescue_food_image, we_create_community_image, happiness_image } from "../assets";
 import {  } from "./css/WhatWeDo.css";
 
