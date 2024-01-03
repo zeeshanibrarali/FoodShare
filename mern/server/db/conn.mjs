@@ -1,17 +1,11 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from 'mongodb';
+const uri = 'mongodb://127.0.0.1:27017/foodUserDB';
+const client = new MongoClient(uri);
 
-const connectionString = process.env.ATLAS_URI || "";
+client.connect();
 
-const client = new MongoClient(connectionString);
+const db = client.db('foodUserDB');
+const usersCollection = db.collection('users');
 
-let conn;
-try {
-  console.log("Connecting to MongoDB Atlas...");
-  conn = await client.connect();
-} catch(e) {
-  console.error(e);
-}
 
-let db = conn.db("sample_training");
-
-export default db;
+export { usersCollection, db };

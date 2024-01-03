@@ -5,6 +5,14 @@ import Chart from './chart';
 export default function Dashboard() {
 
     const [record, setRecord] = useState();
+    const [user, setUser] = useState("");
+
+    useEffect(() => {
+        const userData = JSON.parse(window.localStorage.getItem("user"));
+        console.log(userData, 'sadsa');
+        setUser(userData);
+    }, [])
+
 
     useEffect(() => {
         var requestOptions = {
@@ -35,7 +43,7 @@ export default function Dashboard() {
 
             <div className="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation" style={{ backgroundColor: "#e9ecef" }}>
                 <ul className="nav flex-column sticky-top pl-0 pt-5 p-3 mt-3 ">
-                    <li className="nav-item mb-2 mt-3"><a className="nav-link text-secondary" href="#"><h5>Jacob Nejam</h5></a></li>
+                    <li className="nav-item mb-2 mt-3"><a className="nav-link text-secondary" href="#"><h5>{user.displayName}</h5></a></li>
                     <li className="nav-item mb-2 "><a className="nav-link text-secondary" href="#"><i className="fas fa-user font-weight-bold"></i> <span className="ml-3">Overview</span></a></li>
                     <li className="nav-item mb-2">
                         <a className="nav-link text-secondary" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i className="far fa-file-word font-weight-bold"></i> <span className="ml-3"> Reports▾</span></a>
@@ -138,7 +146,7 @@ export default function Dashboard() {
                                 </thead>
                                 <tbody>
                                     {record?.map((key, output) => (
-                                        <tr>
+                                        <tr key={output.id}>
                                             <td>{output.id}</td>
                                             <td>{output.name}</td>
                                             <td>{output.email}</td>

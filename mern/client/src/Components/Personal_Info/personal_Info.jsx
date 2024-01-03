@@ -1,16 +1,52 @@
-// import { useState } from 'react'
-import './personal_Info.css'
-// import './loginScript.js'
+import { useNavigate } from 'react-router-dom';
+import { getDatabase, ref, set } from "firebase/database";
+import './personal_Info.css';
 
+export default function PersonalInfo() {
+    const navigate = useNavigate();
 
-export default function Login() {
+    function writeUserData(userId, f_name, l_name, address, phone, gender, accType, email) {
+        const db = getDatabase();
+        set(ref(db, 'users/' + userId), {
+            user_id: userId,
+            first_name: f_name,
+            last_name: l_name,
+            address: address,
+            phone: phone,
+            gender: gender,
+            account_type: accType,
+            email: email,
+        });
+    }
 
+    const handleProceed = async (e) => {
+        e.preventDefault();
+        const user = JSON.parse(window.localStorage.getItem('user'));
+        const formData = {
+            firstname: document.getElementById('firstname').value,
+            lastname: document.getElementById('lastname').value,
+            address: document.getElementById('address').value,
+            phone: document.getElementById('phone').value,
+            gender: document.getElementById('gender').value,
+            accType: document.getElementById('accType').value,
+            email: user.email,
+
+        };
+        console.log(formData);
+        const uid = user.uid;
+        try {
+            writeUserData(uid, formData.firstname, formData.lastname, formData.address, formData.phone, formData.gender, formData.accType);
+            navigate('/dashboard');
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <>
             <div className="formbold-main-wrapper">
                 <h1>Profile Information</h1>
                 <div className="formbold-form-wrapper">
-                    <form action="https://formbold.com/s/FORM_ID" method="POST">
+                    <form action="#" method="POST" onSubmit={handleProceed}>
                         <div className="formbold-input-flex">
                             <div>
                                 <input
@@ -59,49 +95,25 @@ export default function Login() {
 
                         <div className="formbold-input-flex">
                             <div>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    placeholder="jhon@mail.com"
-                                    className="formbold-form-input"
-                                />
-                                <label htmlFor="email" className="formbold-form-label"> Mail </label>
-                            </div>
-                            <div>
-                                <input
-                                    type="text"
-                                    name="telephone"
-                                    id="telephone"
-                                    placeholder="XXX-XXX-XXXX (Optional)"
-                                    className="formbold-form-input"
-                                />
-                                <label htmlFor="telephone" className="formbold-form-label"> Telephone No.</label>
-                            </div>
-                        </div>
-
-                        <div className="formbold-input-flex">
-                            <div>
-                                <select className="formbold-form-input">
+                                <select id="gender" className="formbold-form-input">
                                     <option value="Select Gender">Select Gender</option>
-                                    <option value="Armenia">Male</option>
-                                    <option value="Russia">Female</option>
-                                    <option value="Germany">Prefer Not to say</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="unidentified">Prefer Not to say</option>
                                 </select>
                                 <label htmlFor="gender" className="formbold-form-label"> Gender </label>
                             </div>
                             <div>
-                                <select className="formbold-form-input">
-                                    <option value="Select Gender">Select Account Type</option>
-                                    <option value="Armenia">Volunteer</option>
-                                    <option value="Russia">Donor</option>
-                                    {/* <option value="Germany">Prefer Not to say</option> */}
+                                <select id="accType" className="formbold-form-input">
+                                    <option value="Select Account Type">Select Account Type</option>
+                                    <option value="volunteer">Volunteer</option>
+                                    <option value="donor">Donor</option>
                                 </select>
                                 <label htmlFor="accType" className="formbold-form-label"> Account Type </label>
                             </div>
                         </div>
 
-                        <a href="" className="formbold-btn">Proceed</a>
+                        <button type="submit" className="formbold-btn">Proceed</button>
                     </form>
                 </div>
             </div>

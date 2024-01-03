@@ -1,18 +1,20 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
-const User = require('../models/User');
 
-passport.use(new GoogleStrategy({
-  // Google OAuth config
-}, (accessToken, refreshToken, profile, done) => {
-  // Check if user exists in the database, create if not
-  // Call done() with the user object
-}));
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import User from '../models/UserModel.mjs';
 
-passport.use(new FacebookStrategy({
-  // Facebook OAuth config
-}, (accessToken, refreshToken, profile, done) => {
-  // Check if user exists in the database, create if not
-  // Call done() with the user object
-}));
+passport.use(new LocalStrategy(User.authenticate()));
+
+// Serialize user into session
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// Deserialize user from session
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
+export default passport;
