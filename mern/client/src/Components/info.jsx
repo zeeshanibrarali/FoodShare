@@ -12,8 +12,7 @@ export default function Info() {
         <ScrollTrigger onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}>
             <div className='full-info'>
                 <section className="info">
-                    {/* <h1>Info</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis assumenda repellat libero ad natus,doloremque officia expedita labore accusamus nisi.</p> */}
+
                     <div className='container'>
                         <div className="info-row">
                             <div className="info-col">
