@@ -5,7 +5,7 @@ import './personal_Info.css';
 export default function PersonalInfo() {
     const navigate = useNavigate();
 
-    function writeUserData(userId, f_name, l_name, address, phone, gender, accType, email) {
+    function writeUserData(userId, f_name, l_name, address, phone, gender, accType) {
         const db = getDatabase();
         set(ref(db, 'users/' + userId), {
             user_id: userId,
@@ -15,13 +15,13 @@ export default function PersonalInfo() {
             phone: phone,
             gender: gender,
             account_type: accType,
-            email: email,
         });
     }
 
     const handleProceed = async (e) => {
         e.preventDefault();
         const user = JSON.parse(window.localStorage.getItem('user'));
+        console.log(user);
         const formData = {
             firstname: document.getElementById('firstname').value,
             lastname: document.getElementById('lastname').value,
@@ -29,8 +29,6 @@ export default function PersonalInfo() {
             phone: document.getElementById('phone').value,
             gender: document.getElementById('gender').value,
             accType: document.getElementById('accType').value,
-            email: user.email,
-
         };
         console.log(formData);
         const uid = user.uid;

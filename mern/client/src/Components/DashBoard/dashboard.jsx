@@ -1,11 +1,20 @@
 // import React from 'react' 
 import { useState, useEffect } from 'react'
 import Chart from './chart';
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
 
     const [record, setRecord] = useState();
     const [user, setUser] = useState("");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = JSON.parse(window.localStorage.getItem("user"));
+        if (!userData) {
+            navigate("/login");
+        }
+    }, [])
 
     useEffect(() => {
         const userData = JSON.parse(window.localStorage.getItem("user"));

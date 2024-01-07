@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleAuthentication } from "./utils/AuthUtils";
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
 import "./css/login.css";
 
@@ -64,22 +63,22 @@ const Register = () => {
             });
     };
 
-    const loginWithEmail = () => {
-        const auth = getAuth();
-        const email = formData.email;
-        const password = formData.password;
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed up 
-                const user = userCredential.user;
-                console.log(user);
-                // ...
-            })
-            .catch((err) => {
-                console.log(err.code);
-                console.log(err.message);
-            });
-    }
+    // const loginWithEmail = () => {
+    //     const auth = getAuth();
+    //     const email = formData.email;
+    //     const password = formData.password;
+    //     createUserWithEmailAndPassword(auth, email, password)
+    //         .then((userCredential) => {
+    //             // Signed up 
+    //             const user = userCredential.user;
+    //             console.log(user);
+    //             // ...
+    //         })
+    //         .catch((err) => {
+    //             console.log(err.code);
+    //             console.log(err.message);
+    //         });
+    // }
 
 
 
