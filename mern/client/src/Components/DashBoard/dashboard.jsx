@@ -56,11 +56,12 @@ export default function Dashboard() {
                     <GoogleMaps />
                 </div>
 
-                <div className='mt-3'>
-                    <Footer />
-                </div>
 
 
+            </div>
+
+            <div className='mt-3'>
+                <Footer />
             </div>
         </div>
     );

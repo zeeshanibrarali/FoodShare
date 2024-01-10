@@ -32,7 +32,7 @@ const NavigateSidebar = ({ user }) => {
                 <li className="nav-item">
                     <Link to="/new-request" className="nav-link">
                         <i className="fas fa-file-export font-weight-bold"></i>
-                        <span className="ml-3">New Request</span>
+                        <span className="ml-3">Donations</span>
                     </Link>
                 </li>
                 <li className="nav-item">
