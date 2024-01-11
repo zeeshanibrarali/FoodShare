@@ -1,6 +1,6 @@
 // import React from 'react'
 import 'chart.js/auto';
-import { Pie } from 'react-chartjs-2';
+import { Pie, Bar, Line } from 'react-chartjs-2';
 
 const data = {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -38,7 +38,17 @@ export default function chart() {
 
                 </div>
             </div>
-            <Pie data={data} />
+            <div className="row justify-content-center gap-5">
+                <div className="col col-5">
+                    <Bar data={data} />
+                </div>
+                <div className="col col-5">
+                    <Line data={data} />
+                </div>
+                <div className="col col-8" style={{ width: "400px" }}>
+                    <Pie data={data} />
+                </div>
+            </div>
         </>
     )
 }

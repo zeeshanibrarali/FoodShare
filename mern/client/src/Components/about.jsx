@@ -1,23 +1,43 @@
 import React from 'react';
+import { brandLogo } from "../assets";
+import Footer from "./footer";
+import './css/about.css'
 
 const About = () => {
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-8 col-md-10 mx-auto">
-                    <h2 className="section-heading">About Us</h2>
-                    <p>
-                        Welcome to our application! This is a brief description of our organization
-                        or the purpose of the application. You can provide information about your
-                        mission, values, or any other relevant details.
-                    </p>
-                    <p>
-                        Feel free to contact us if you have any questions or feedback. We're here
-                        to assist you!
-                    </p>
-                </div>
-            </div>
-        </div>
+        <>
+            <section className="AboutNavheader">
+                <nav>
+                    <a href="index.html"><img src={brandLogo} alt="" /></a>
+                    <div className="nav-links" id="navlink">
+                        <ul>
+                            <li><a href="">HOME</a></li>
+                            <li><a href="">ABOUT US</a></li>
+                            <a href="/login" className="logInBtn">Log In</a>
+                        </ul>
+                    </div>
+                </nav>
+            </section>
+            <section className='Mission'>
+                        <div className='innerDiv'>
+                            <h2>Our Mission</h2>
+                            <div className="content">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae omnis soluta laudantium impedit ex qui officia unde ipsam earum quam voluptates aliquam sint consectetur, voluptas, consequuntur amet dolorum magni? Impedit, voluptatum quaerat? Aliquid at sit provident voluptatum ipsa necessitatibus, sapiente beatae omnis doloribus, sunt possimus, impedit id unde. Deleniti, tenetur.
+                            </div>
+                        </div>
+            </section>
+            <section className='Vision'>
+                        <div className='innerDiv'>
+                            <h2>Our Vision</h2>
+                            <div className="content">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae omnis soluta laudantium impedit ex qui officia unde ipsam earum quam voluptates aliquam sint consectetur, voluptas, consequuntur amet dolorum magni? Impedit, voluptatum quaerat? Aliquid at sit provident voluptatum ipsa necessitatibus, sapiente beatae omnis doloribus, sunt possimus, impedit id unde. Deleniti, tenetur.
+                            </div>
+                        </div>
+            </section>
+            <section>
+                <Footer />
+            </section>
+        </>
     );
 };
 

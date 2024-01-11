@@ -12,7 +12,8 @@ import RequestListing from "./Components/DashBoard/RequestListing";
 import Analytics from './Components/DashBoard/Analytics';
 import GoogleMaps from './Components/DashBoard/GoogleMaps';
 import About from './Components/about';
-import Contact from './Components/contact';
+// import Contact from './Components/contact';
+import GetInTouch from "./Components/GetInTouch/GetInTouch";
 import './App.css';
 
 function App() {
@@ -41,7 +42,8 @@ function App() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/map" element={<GoogleMaps />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        {/* <Route path="/contact" element={<Contact />} /> */}
+        <Route path="/contact" element={<GetInTouch />} />
 
       </Routes>
     </Router>
