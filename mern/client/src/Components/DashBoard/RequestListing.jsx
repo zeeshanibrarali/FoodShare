@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getDatabase, ref, push, set, onValue } from 'firebase/database';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import './RequestForm.css';
 
 const RequestListing = () => {
@@ -10,6 +12,115 @@ const RequestListing = () => {
         expirationDate: '',
     });
     const [tableData, setTableData] = useState([]);
+    const [userId, setUserId] = useState(null);
+    const [userRole, setUserRole] = useState(null);
+
+    useEffect(() => {
+        const db = getDatabase();
+        const requestsRef = ref(db, 'donationRequests');
+
+        // Fetch data from Firebase on component mount
+        onValue(requestsRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                const requestsArray = Object.entries(data).map(([requestId, requestData]) => ({
+                    requestId,
+                    ...requestData
+                }));
+                setTableData(requestsArray);
+            }
+        });
+    }, []);
+
+    useEffect(() => {
+        // Listen for changes in authentication state
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserId(user.uid);
+                const db = getDatabase();
+                const userRef = ref(db, `users/${user.uid}`);
+                onValue(userRef, (snapshot) => {
+                    const userData = snapshot.val();
+                    console.log(userData);
+                    if (userData && userData.account_type) {
+                        setUserRole(userData.account_type);
+                    }
+                });
+            } else {
+                setUserId(null);
+                setUserRole(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    // const handleAccept = (requestId) => {
+    //     if (userRole === "volunteer") {
+    //         const db = getDatabase();
+    //         const requestRef = ref(db, `donationRequests/${requestId}`);
+
+    //         // Update the entry in the 'donationRequests' node in Firebase to mark it as pending
+    //         set(requestRef, { status: "pending" });
+
+    //         // Update the local state to reflect the change
+    //         const updatedTableData = tableData.map((data) => {
+    //             if (data.requestId === requestId) {
+    //                 return { ...data, status: "pending" };
+    //             }
+    //             return data;
+    //         });
+
+    //         setTableData(updatedTableData);
+    //     }
+    // };
+
+    const handleAccept = (requestId) => {
+        if (userRole === "volunteer") {
+            const db = getDatabase();
+            const requestRef = ref(db, `donationRequests/${requestId}`);
+
+            // Update the entry in the 'donationRequests' node in Firebase to mark it as pending
+            set(requestRef, {
+                ...tableData.find(data => data.requestId === requestId),
+                status: "pending"
+            })
+                .then(() => {
+                    // Update the local state to reflect the change after the Firebase operation is complete
+                    const updatedTableData = tableData.map((data) => {
+                        if (data.requestId === requestId) {
+                            return { ...data, status: "pending" };
+                        }
+                        return data;
+                    });
+
+                    setTableData(updatedTableData);
+                })
+                .catch((error) => {
+                    console.error("Error updating status:", error);
+                });
+        }
+    };
+
+
+    const handlePending = (requestId) => {
+        if (userRole === "recipient") {
+            const db = getDatabase();
+            const requestRef = ref(db, `donationRequests/${requestId}`);
+
+            // Remove the entry from the 'donationRequests' node in Firebase
+            set(requestRef, null);
+
+            // Update the local state to remove the entry
+            const updatedTableData = tableData.filter((data) => data.requestId !== requestId);
+            setTableData(updatedTableData);
+
+            // Show a message to the user (you can use a toast or any other UI component)
+            alert("Delivery received! Entry removed from the list.");
+        }
+    };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -18,12 +129,17 @@ const RequestListing = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Add the new data to the tableData
-        const newTableData = [
-            ...tableData,
-            { ...formData, id: tableData.length + 1 },
-        ];
-        setTableData(newTableData);
+        const db = getDatabase();
+        const requestsRef = ref(db, 'donationRequests');
+
+        // Add the new data to the 'requests' node in Firebase
+        const newRequestRef = push(requestsRef);
+        // set(newRequestRef, formData);
+        set(newRequestRef, {
+            ...formData,
+            userId: userId,
+            userRole: userRole,
+        });
 
         // Reset the form data and hide the form
         setFormData({
@@ -108,10 +224,41 @@ const RequestListing = () => {
                                 <td style={{ width: "216px" }} >{data.location}</td>
                                 <td style={{ width: "216px" }} >{data.expirationDate}</td>
                                 <td style={{ width: "216px" }} >
-                                    <div className="btn-group" role="group">
-                                        <button type="button" className="btn btn-success">Accept</button>
-                                        <button type="button" className="btn btn-success">Location</button>
-                                    </div>
+                                    {userRole === "volunteer" && (
+                                        <div className="btn-group" role="group">
+                                            <button
+                                                type="button"
+                                                className={`btn ${data.status === "pending" ? "btn-warning" : "btn-success"}`}
+                                                onClick={() => handleAccept(data.requestId)}
+                                                disabled={data.status === "pending"}
+                                            >
+                                                {data.status === "pending" ? "Pending" : "Accept"}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="btn btn-success"
+                                            >
+                                                Location
+                                            </button>
+                                        </div>
+                                    )}
+                                    {userRole === "recipient" && (
+                                        <div className="btn-group" role="group">
+                                            <button
+                                                type="button"
+                                                className="btn btn-warning"
+                                                onClick={() => handlePending(data.requestId)}
+                                            >
+                                                Pending
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="btn btn-success"
+                                            >
+                                                Location
+                                            </button>
+                                        </div>
+                                    )}
                                 </td>
                             </tr>
                         ))}

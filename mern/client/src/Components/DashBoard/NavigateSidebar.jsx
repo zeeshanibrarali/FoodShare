@@ -3,7 +3,7 @@ import './NavigateSidebar.css'; // Import the external CSS file
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth } from "firebase/auth";
 
-const NavigateSidebar = ({ user }) => {
+const NavigateSidebar = ({ user, userName }) => {
     const navigate = useNavigate();
     const auth = getAuth();
     const handleSignOut = async () => {
@@ -20,7 +20,7 @@ const NavigateSidebar = ({ user }) => {
             <ul className="nav flex-column sticky-top">
                 <li className="nav-item mb-3 ">
                     <a className="nav-link text-secondary" href="#">
-                        <h5>{user.displayName}</h5>
+                        <h5>{userName}</h5>
                     </a>
                 </li>
                 <li className="nav-item">

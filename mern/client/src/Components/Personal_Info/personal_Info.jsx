@@ -106,6 +106,7 @@ export default function PersonalInfo() {
                                     <option value="Select Account Type">Select Account Type</option>
                                     <option value="volunteer">Volunteer</option>
                                     <option value="donor">Donor</option>
+                                    <option value="recipient">Recipient</option>
                                 </select>
                                 <label htmlFor="accType" className="formbold-form-label"> Account Type </label>
                             </div>
