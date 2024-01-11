@@ -3,7 +3,7 @@ import { getDatabase, ref, push, set, onValue } from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import './RequestForm.css';
 
-const RequestListing = () => {
+const RequestListing = ({ setHighlightedLocation }) => {
     const [showForm, setShowForm] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
@@ -14,6 +14,11 @@ const RequestListing = () => {
     const [tableData, setTableData] = useState([]);
     const [userId, setUserId] = useState(null);
     const [userRole, setUserRole] = useState(null);
+
+    const handleLocationClick = (location) => {
+        setHighlightedLocation(location);
+    };
+
 
     useEffect(() => {
         const db = getDatabase();
@@ -56,38 +61,18 @@ const RequestListing = () => {
         return () => unsubscribe();
     }, []);
 
-    // const handleAccept = (requestId) => {
-    //     if (userRole === "volunteer") {
-    //         const db = getDatabase();
-    //         const requestRef = ref(db, `donationRequests/${requestId}`);
 
-    //         // Update the entry in the 'donationRequests' node in Firebase to mark it as pending
-    //         set(requestRef, { status: "pending" });
-
-    //         // Update the local state to reflect the change
-    //         const updatedTableData = tableData.map((data) => {
-    //             if (data.requestId === requestId) {
-    //                 return { ...data, status: "pending" };
-    //             }
-    //             return data;
-    //         });
-
-    //         setTableData(updatedTableData);
-    //     }
-    // };
 
     const handleAccept = (requestId) => {
         if (userRole === "volunteer") {
             const db = getDatabase();
             const requestRef = ref(db, `donationRequests/${requestId}`);
 
-            // Update the entry in the 'donationRequests' node in Firebase to mark it as pending
             set(requestRef, {
                 ...tableData.find(data => data.requestId === requestId),
                 status: "pending"
             })
                 .then(() => {
-                    // Update the local state to reflect the change after the Firebase operation is complete
                     const updatedTableData = tableData.map((data) => {
                         if (data.requestId === requestId) {
                             return { ...data, status: "pending" };
@@ -127,14 +112,14 @@ const RequestListing = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
+
         const db = getDatabase();
         const requestsRef = ref(db, 'donationRequests');
 
         // Add the new data to the 'requests' node in Firebase
         const newRequestRef = push(requestsRef);
-        // set(newRequestRef, formData);
         set(newRequestRef, {
             ...formData,
             userId: userId,
@@ -155,12 +140,14 @@ const RequestListing = () => {
         <div className="row row-md-10 row-sm-12">
             <h5 className="title mb-3 text-secondary" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 Donation Requests
-                <button
-                    className="btn btn-primary mb-3 mt-3"
-                    onClick={() => setShowForm(true)}
-                >
-                    New Request
-                </button>
+                {userRole === "donor" && (
+                    <button
+                        className="btn btn-primary mb-3 mt-3"
+                        onClick={() => setShowForm(true)}
+                    >
+                        New Request
+                    </button>
+                )}
             </h5>
             {showForm && (
                 <div className="form-popup">
@@ -234,14 +221,17 @@ const RequestListing = () => {
                                             >
                                                 {data.status === "pending" ? "Pending" : "Accept"}
                                             </button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-success"
-                                            >
-                                                Location
-                                            </button>
                                         </div>
                                     )}
+                                    <div className="btn-group" role="group">
+                                        <button
+                                            type="button"
+                                            className="btn btn-success"
+                                            onClick={() => handleLocationClick(data.location)}
+                                        >
+                                            Location
+                                        </button>
+                                    </div>
                                     {userRole === "recipient" && (
                                         <div className="btn-group" role="group">
                                             <button
@@ -254,6 +244,7 @@ const RequestListing = () => {
                                             <button
                                                 type="button"
                                                 className="btn btn-success"
+                                                onClick={() => handleLocationClick(data.location)}
                                             >
                                                 Location
                                             </button>

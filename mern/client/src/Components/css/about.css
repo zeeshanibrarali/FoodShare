@@ -7,7 +7,21 @@
   position: relative;
 }
 
-.Mission,
-.Vision {
-  margin: 50px 20px 50px 20px;
+.MissionVisionContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+h2{
+  color: green;
+}
+
+.Mission, .Vision {
+  margin: 50px 20px;
+  padding: 50px;
+  text-align: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff; /* Add a background color if needed */
 }

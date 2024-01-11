@@ -1,5 +1,5 @@
-import React from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import React, { useRef } from 'react';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 
 const containerStyle = {
     width: '100%',
@@ -11,27 +11,32 @@ const center = {
     lng: 67.0011, // Coordinates for Karachi
 };
 
-const GoogleMaps = () => {
-    const { isLoaded, loadError } = useJsApiLoader({
+const GoogleMaps = ({ highlightedLocation }) => {
+    const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: 'AIzaSyCX-7V4TgH_eIriUK-9dD7MgJW-Yv5n_sM', // Replace with your Google Maps API key
+        googleMapsApiKey: 'AIzaSyCX-7V4TgH_eIriUK-9dD7MgJW-Yv5n_sM',
     });
 
-    if (loadError) {
-        console.error('Error loading Google Maps API:', loadError);
-        return <div>Error loading Google Maps. Please try again later.</div>;
-    }
+    const mapRef = useRef(null);
+    const handleMapLoad = (map) => {
+        mapRef.current = map;
+    };
 
-    const map = isLoaded ? (
+    const mapComponent = isLoaded ? (
         <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
             zoom={12}
+            onLoad={handleMapLoad}
         >
-            {/* Marker for Karachi */}
             <Marker position={center} />
 
-            {/* You can add more markers as needed */}
+            {highlightedLocation && (
+                <Marker
+                    position={highlightedLocation}
+                    draggable={false}
+                />
+            )}
         </GoogleMap>
     ) : (
         <></>
@@ -41,7 +46,7 @@ const GoogleMaps = () => {
         <div className="row">
             <div className="col-12">
                 <h4 className="title mt-3 mb-3 text-secondary">Google Maps</h4>
-                {map}
+                {mapComponent}
             </div>
         </div>
     );

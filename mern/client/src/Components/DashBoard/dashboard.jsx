@@ -4,7 +4,7 @@ import NavigateSidebar from './NavigateSidebar';
 import RequestListing from './RequestListing';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import Footer from '../footer';
+import Footer from '../Footer/footer';
 import GoogleMaps from './GoogleMaps';
 import Metrics from './Metrixs';
 import './dashboard.css';
@@ -15,6 +15,7 @@ export default function Dashboard() {
     const [userName, setUserName] = useState(null);
     const [userId, setUserId] = useState(null);
     const [userRole, setUserRole] = useState(null);
+    const [highlightedLocation, setHighlightedLocation] = useState(null);
 
     useEffect(() => {
         const userData = JSON.parse(window.localStorage.getItem('user'));
@@ -47,23 +48,8 @@ export default function Dashboard() {
                 setUserName(null);
             }
         });
-
         return () => unsubscribe();
     }, []);
-
-
-    useEffect(() => {
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow',
-        };
-
-        fetch('https://jsonplaceholder.typicode.com/users', requestOptions)
-            .then((response) => response.json())
-            .then((result) => setRecord(result))
-            .catch((error) => console.log('error', error));
-    }, []);
-
 
     function capitalizeFirstLetter(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
@@ -73,7 +59,7 @@ export default function Dashboard() {
         <div className="container-fluid m-0 p-0">
             <div className="container-fluid row p-0">
                 {/* Sidebar */}
-                <NavigateSidebar user={user} userName={userName}/>
+                <NavigateSidebar user={user} userName={userName} />
 
                 <div className="col-10">
                     <p className="lead d-none d-sm-block">{userRole}'s Dashboard</p>
@@ -83,15 +69,16 @@ export default function Dashboard() {
                     <hr />
 
                     {/* Request Listing */}
-                    <RequestListing />
+                    <RequestListing
+                        setHighlightedLocation={setHighlightedLocation}
+                    />
                     <hr />
 
                     {/* Google Maps */}
-                    <GoogleMaps />
+                    <GoogleMaps
+                        highlightedLocation={highlightedLocation}
+                    />
                 </div>
-
-
-
             </div>
 
             <div className='mt-3'>
@@ -100,5 +87,3 @@ export default function Dashboard() {
         </div>
     );
 }
-
-

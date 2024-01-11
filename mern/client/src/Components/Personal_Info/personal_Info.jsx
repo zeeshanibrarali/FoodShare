@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { getDatabase, ref, set } from "firebase/database";
-import './personal_Info.css';
+import '../css/personal_Info.css';
 
 export default function PersonalInfo() {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function PersonalInfo() {
             user_id: userId,
             first_name: f_name,
             last_name: l_name,
-            address: address,
+            location: address,
             phone: phone,
             gender: gender,
             account_type: accType,
@@ -31,14 +31,22 @@ export default function PersonalInfo() {
             accType: document.getElementById('accType').value,
         };
         console.log(formData);
-        const uid = user.uid;
         try {
-            writeUserData(uid, formData.firstname, formData.lastname, formData.address, formData.phone, formData.gender, formData.accType);
+            writeUserData(
+                user.uid,
+                formData.firstname,
+                formData.lastname,
+                formData.address,
+                formData.phone,
+                formData.gender,
+                formData.accType,
+            );
             navigate('/dashboard');
         } catch (error) {
             console.log(error);
         }
     };
+
     return (
         <>
             <div className="formbold-main-wrapper">
@@ -78,6 +86,33 @@ export default function PersonalInfo() {
                                     className="formbold-form-input"
                                 />
                                 <label htmlFor="address" className="formbold-form-label"> Address </label>
+                                {/* <PlacesAutocomplete
+                                    value={address}
+                                    onChange={handleAddressChange}
+                                    onSelect={handleAddressChange}
+                                >
+                                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                        <div>
+                                            <input
+                                                {...getInputProps({
+                                                    placeholder: 'Enter your address',
+                                                    className: 'formbold-form-input',
+                                                })}
+                                            />
+                                            <div>
+                                                {loading && <div>Loading...</div>}
+                                                {suggestions.map((suggestion) => (
+                                                    <div {...getSuggestionItemProps(suggestion)}>
+                                                        {suggestion.description}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </PlacesAutocomplete> */}
+                                {/* <label htmlFor="address" className="formbold-form-label">
+                                    Address
+                                </label> */}
                             </div>
                             <div>
                                 <input

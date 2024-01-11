@@ -20,7 +20,6 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // await handleAuthentication(formData, false, navigate, setError);
         const auth = getAuth();
         const email = formData.email;
         const password = formData.password;
@@ -44,7 +43,6 @@ const Register = () => {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
             .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
                 // The signed-in user info.
@@ -62,25 +60,6 @@ const Register = () => {
                 const credential = GoogleAuthProvider.credentialFromError(error);
             });
     };
-
-    // const loginWithEmail = () => {
-    //     const auth = getAuth();
-    //     const email = formData.email;
-    //     const password = formData.password;
-    //     createUserWithEmailAndPassword(auth, email, password)
-    //         .then((userCredential) => {
-    //             // Signed up 
-    //             const user = userCredential.user;
-    //             console.log(user);
-    //             // ...
-    //         })
-    //         .catch((err) => {
-    //             console.log(err.code);
-    //             console.log(err.message);
-    //         });
-    // }
-
-
 
     const switchToLogin = () => {
         navigate("/login");

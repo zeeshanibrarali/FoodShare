@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import ScrollTrigger from "react-scroll-trigger";
 import Countup from "react-countup";
-import '../App.css'
-import { donorpng } from "../assets";
+import '../../App.css'
+import { donorpng } from "../../assets";
 
 export default function Info() {
 

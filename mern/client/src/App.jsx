@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './Components/header';
-import WhatWeDo from './Components/WhatWeDo';
-import Info from './Components/info';
-import SponsorLogo from './Components/sponsorLogo';
-import Footer from './Components/footer';
+import Header from './Components/Header/header';
+import WhatWeDo from './Components/Home/WhatWeDo';
+import Info from './Components/Home/info';
+import SponsorLogo from './Components/Home/sponsorLogo';
+import Footer from './Components/Footer/footer';
 import Dashboard from './Components/DashBoard/dashboard';
 import Login from "./Components/login";
 import Register from "./Components/register"
@@ -11,8 +11,7 @@ import PersonalInfo from "./Components/Personal_Info/personal_Info";
 import RequestListing from "./Components/DashBoard/RequestListing";
 import Analytics from './Components/DashBoard/Analytics';
 import GoogleMaps from './Components/DashBoard/GoogleMaps';
-import About from './Components/about';
-// import Contact from './Components/contact';
+import About from './Components/About/about';
 import GetInTouch from "./Components/GetInTouch/GetInTouch";
 import './App.css';
 
@@ -25,10 +24,10 @@ function App() {
           path="/"
           element={
             <>
-              <Header />
-              <WhatWeDo />
+              <Header id="header" />
+              <WhatWeDo id="whatwedo" />
               <Info />
-              <SponsorLogo />
+              <SponsorLogo id="sponsors" />
               <Footer />
             </>
           }
@@ -42,8 +41,8 @@ function App() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/map" element={<GoogleMaps />} />
         <Route path="/about" element={<About />} />
-        {/* <Route path="/contact" element={<Contact />} /> */}
         <Route path="/contact" element={<GetInTouch />} />
+
 
       </Routes>
     </Router>

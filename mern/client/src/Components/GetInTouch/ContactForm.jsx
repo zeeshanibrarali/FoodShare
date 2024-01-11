@@ -1,5 +1,4 @@
-// import React from 'react'
-import './ContactForm.css'
+import '../css/ContactForm.css'
 
 export default function ContactForm() {
     return (
@@ -65,7 +64,7 @@ export default function ContactForm() {
                             <label htmlFor="message" className="formbold-form-label"> Message </label>
                         </div>
 
-                        <a href="" className="formbold-btn">Send Message</a>
+                        <a href="/" className="formbold-btn">Send Message</a>
                     </form>
                 </div>
             </div>
