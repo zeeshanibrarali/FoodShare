@@ -4,15 +4,15 @@ import WhatWeDo from './Components/Home/WhatWeDo';
 import Info from './Components/Home/info';
 import SponsorLogo from './Components/Home/sponsorLogo';
 import Footer from './Components/Footer/footer';
-import Dashboard from './Components/DashBoard/dashboard';
-import Login from "./Components/login";
-import Register from "./Components/register"
+import Dashboard from './Components/DashBoard/Dashboard/dashboard';
+import Login from "./Components/Login&Register/login";
+import Register from "./Components/Login&Register/register"
 import PersonalInfo from "./Components/Personal_Info/personal_Info";
-import RequestListing from "./Components/DashBoard/RequestListing";
-import Analytics from './Components/DashBoard/Analytics';
-import GoogleMaps from './Components/DashBoard/GoogleMaps';
+import RequestListing from "./Components/DashBoard/Donations/RequestListing";
+import Analytics from './Components/DashBoard/Profile/Analytics';
 import About from './Components/About/about';
 import GetInTouch from "./Components/GetInTouch/GetInTouch";
+import GoogleMaps from './Components/DashBoard/Dashboard/GoogleMaps';
 import './App.css';
 
 function App() {

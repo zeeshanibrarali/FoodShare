@@ -14,9 +14,7 @@ h5 {
 }
 
 
-.nav-item:hover,
-.nav-link:hover,
-.icon li:hover{
+.nav-item:hover{
   transition: 0.5s;
   transform: scale(1.1);
   color: green;
@@ -51,10 +49,6 @@ h5 {
   background-color: transparent;
   border: 1px solid darkgreen;
   color: darkgreen;
-}
-
-.nav-item:hover {
-  background-color: transparent;
 }
 
 p{

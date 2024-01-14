@@ -29,23 +29,18 @@ const data = {
     ],
 };
 
+const barOptions = {
+    maintainAspectRatio: false,
+};
+
 export default function chart() {
     return (
         <>
-            <div className='header'>
-
-                <div className='links'>
-
-                </div>
-            </div>
             <div className="row justify-content-center gap-5">
                 <div className="col col-5">
-                    <Bar data={data} />
+                    <Bar data={data} options={barOptions} />
                 </div>
                 <div className="col col-5">
-                    <Line data={data} />
-                </div>
-                <div className="col col-8" style={{ width: "400px" }}>
                     <Pie data={data} />
                 </div>
             </div>

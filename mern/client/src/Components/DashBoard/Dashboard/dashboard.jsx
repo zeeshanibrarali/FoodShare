@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavigateSidebar from './NavigateSidebar';
-import RequestListing from './RequestListing';
+import NavigateSidebar from '../Sidebar/NavigateSidebar';
+import RequestListing from '../Donations/RequestListing';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import Footer from '../Footer/footer';
+import Footer from '../../Footer/footer';
 import GoogleMaps from './GoogleMaps';
 import Metrics from './Metrixs';
-import './dashboard.css';
+import '../../css/dashboard.css';
 
 export default function Dashboard() {
     const [user, setUser] = useState('');
@@ -15,16 +15,22 @@ export default function Dashboard() {
     const [userName, setUserName] = useState(null);
     const [userId, setUserId] = useState(null);
     const [userRole, setUserRole] = useState(null);
-    const [highlightedLocation, setHighlightedLocation] = useState(null);
+    const [selectedLocationLat, setSelectedLocationLat] = useState(null);
+    const [selectedLocationLng, setSelectedLocationLng] = useState(null);
 
     useEffect(() => {
-        const userData = JSON.parse(window.localStorage.getItem('user'));
-        if (!userData) {
-            navigate('/login');
-        } else {
-            setUser(userData);
-        }
-    }, [navigate]);
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in.
+                setUser(user);
+            } else {
+                // No user is signed in.
+                navigate('/login');
+            }
+        });
+        return () => unsubscribe();
+    }, [navigate, setUser]);
 
     useEffect(() => {
         // Listen for changes in authentication state
@@ -55,29 +61,33 @@ export default function Dashboard() {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    const handleLocationClick = (lan, lng) => {
+        setSelectedLocationLat(lan);
+        setSelectedLocationLng(lng);
+    };
+
     return (
         <div className="container-fluid m-0 p-0">
             <div className="container-fluid row p-0">
                 {/* Sidebar */}
-                <NavigateSidebar user={user} userName={userName} />
+                <NavigateSidebar userName={userName} />
 
                 <div className="col-10">
-                    <p className="lead d-none d-sm-block">{userRole}'s Dashboard</p>
+                    <p className="lead d-none d-sm-block pt-2 text-secondary"><strong>Overview</strong>
+                    </p>
 
                     {/* Metrics */}
                     <Metrics />
                     <hr />
 
                     {/* Request Listing */}
-                    <RequestListing
-                        setHighlightedLocation={setHighlightedLocation}
+                    <RequestListing dashboardView={true}
+                        handleLocationClick={handleLocationClick}
                     />
-                    <hr />
 
                     {/* Google Maps */}
-                    <GoogleMaps
-                        highlightedLocation={highlightedLocation}
-                    />
+                    <GoogleMaps selectedLocationLat={selectedLocationLat}
+                        selectedLocationLng={selectedLocationLng} />
                 </div>
             </div>
 

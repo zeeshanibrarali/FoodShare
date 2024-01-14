@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDyRg5Kjef9xiRUtdQ8UR-P665AE5F1SUY",
+    apiKey: process.env.REACT_APP_GOOGLE_FIREBASE_API_KEY,
     authDomain: "foodshare-409011.firebaseapp.com",
     projectId: "foodshare-409011",
     storageBucket: "foodshare-409011.appspot.com",

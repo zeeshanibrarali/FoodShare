@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
-import "./css/login.css";
+import "../css/login.css";
 
 const Register = () => {
     const [formData, setFormData] = useState({

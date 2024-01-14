@@ -1,9 +1,9 @@
 import React from 'react';
-import './NavigateSidebar.css'; // Import the external CSS file
+import '../../css/NavigateSidebar.css'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth } from "firebase/auth";
 
-const NavigateSidebar = ({ user, userName }) => {
+const NavigateSidebar = ({ userName }) => {
     const navigate = useNavigate();
     const auth = getAuth();
     const handleSignOut = async () => {
@@ -16,58 +16,52 @@ const NavigateSidebar = ({ user, userName }) => {
     };
 
     return (
-        <div className="sidebar col-md-3 col-lg-2" id="sidebar" role="navigation" >
+        <div className="sidebar col-md-3 col-lg-2" id="sidebar" role="navigation">
             <ul className="nav flex-column sticky-top">
                 <li className="nav-item mb-3 ">
                     <a className="nav-link text-secondary" href="#">
-                        <h5>{userName}</h5>
+                        <h5>Greetings {userName}</h5>
                     </a>
                 </li>
                 <li className="nav-item">
+                    <Link to="/dashboard" className="nav-link">
+                        <i className="fas fa-chart-bar font-weight-bold"></i>
+                        <span className="ml-3">Dashboard</span>
+                    </Link>
+                </li>
+                <li className="nav-item">
                     <Link to="/" className="nav-link">
-                        <i className="fas fa-user font-weight-bold"></i>
+                        <i className="fas fa-home font-weight-bold"></i>
                         <span className="ml-3">Home</span>
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/new-request" className="nav-link">
-                        <i className="fas fa-file-export font-weight-bold"></i>
+                        <i className="fas fa-donate font-weight-bold"></i>
                         <span className="ml-3">Donations</span>
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/personal-info" className="nav-link">
-                        <i className="far fa-chart-bar font-weight-bold"></i>
-                        <span className="ml-3">Personal Info.</span>
-                    </Link>
-                </li>
-                <li className="nav-item">
                     <Link to="/analytics" className="nav-link">
-                        <i className="fa fa-chart-bar font-weight-bold"></i>
-                        <span className="ml-3">Analytics</span>
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/map" className="nav-link">
-                        <i className="fas fa-tablet-alt font-weight-bold"></i>
-                        <span className="ml-3">Map</span>
+                        <i className="fas fa-user font-weight-bold"></i>
+                        <span className="ml-3">Profile</span>
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/about" className="nav-link">
-                        <i className="fa fa-info-circle" aria-hidden="true"></i>
+                        <i className="fas fa-info-circle"></i>
                         <span className="ml-3">About</span>
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/contact" className="nav-link">
-                        <i className="fa-solid fa-address-book"></i>
+                        <i className="fas fa-address-book"></i>
                         <span className="ml-3">Contact</span>
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/sign-out" className="nav-link" onClick={handleSignOut}>
-                        <i className="fa fa-sign-out" aria-hidden="true"></i>
+                        <i className="fas fa-sign-out-alt"></i>
                         <span className="ml-3">Sign Out</span>
                     </Link>
                 </li>

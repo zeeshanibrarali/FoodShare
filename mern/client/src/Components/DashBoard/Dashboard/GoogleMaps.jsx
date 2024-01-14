@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 
 const containerStyle = {
     width: '100%',
@@ -11,10 +11,10 @@ const center = {
     lng: 67.0011, // Coordinates for Karachi
 };
 
-const GoogleMaps = ({ highlightedLocation }) => {
+const GoogleMaps = ({ selectedLocationLat, selectedLocationLng }) => {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: 'AIzaSyCX-7V4TgH_eIriUK-9dD7MgJW-Yv5n_sM',
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     });
 
     const mapRef = useRef(null);
@@ -25,18 +25,14 @@ const GoogleMaps = ({ highlightedLocation }) => {
     const mapComponent = isLoaded ? (
         <GoogleMap
             mapContainerStyle={containerStyle}
-            center={center}
-            zoom={12}
+            center={{ lat: selectedLocationLat || center.lat, lng: selectedLocationLng || center.lng }}
+            zoom={selectedLocationLat && selectedLocationLng ? 15 : 12}
             onLoad={handleMapLoad}
         >
-            <Marker position={center} />
-
-            {highlightedLocation && (
-                <Marker
-                    position={highlightedLocation}
-                    draggable={false}
-                />
+            {selectedLocationLat && selectedLocationLng && (
+                <MarkerF position={{ lat: parseFloat(selectedLocationLat), lng: parseFloat(selectedLocationLng) }} />
             )}
+            <MarkerF position={center}></MarkerF>
         </GoogleMap>
     ) : (
         <></>

@@ -1,6 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const Metrics = () => {
+
+    const [volunteers, setVolunteers] = useState(0);
+    const [beneficiaries, setBeneficiaries] = useState(0);
+    const [quantitySum, setQuantitySum] = useState(0);
+    const [weightSum, setWeightSum] = useState(0);
+
+    useEffect(() => {
+        const db = getDatabase();
+        const requestsRef = ref(db, 'donationRequests');
+        const usersRef = ref(db, 'users');
+
+        onValue(requestsRef, (snapshot) => {
+            const data = snapshot.val();
+            console.log(data);
+
+            if (data) {
+                const totalQuantity = Object.values(data).reduce((sum, request) => sum + (parseFloat(request.foodQuantity) || 0), 0);
+                const totalWeight = Object.values(data).reduce((sum, request) => sum + (parseFloat(request.foodWeight) || 0), 0);
+
+                setQuantitySum(totalQuantity);
+                setWeightSum(totalWeight);
+            }
+        });
+
+        onValue(usersRef, (snapshot) => {
+            const usersData = snapshot.val();
+            console.log(usersData);
+
+            if (usersData) {
+                // Count volunteers and beneficiaries
+                const totalVolunteers = Object.values(usersData).filter(user => user.account_type === 'volunteer').length;
+                const totalBeneficiaries = Object.values(usersData).filter(user => user.account_type === 'donor').length;
+
+                setVolunteers(totalVolunteers);
+                setBeneficiaries(totalBeneficiaries);
+            }
+        });
+    }, []);
+
+
     return (
         <div>
             <div className="row mb-3 flex justify-center">
@@ -11,7 +53,7 @@ const Metrics = () => {
                                 <i className="fa fa-apple-alt fa-4x"></i>
                             </div>
                             <h6 className="text-uppercase">Food Items Donated</h6>
-                            <h1 className="display-4">134</h1>
+                            <h1 className="display-4">{quantitySum + "+"}</h1>
                         </div>
                     </div>
                 </div>
@@ -22,7 +64,7 @@ const Metrics = () => {
                                 <i className="fa fa-cutlery fa-4x"></i>
                             </div>
                             <h6 className="text-uppercase">Meals Provided</h6>
-                            <h1 className="display-4">87 </h1>
+                            <h1 className="display-4">{weightSum + " Kg"}</h1>
                         </div>
                     </div>
                 </div>
@@ -33,7 +75,7 @@ const Metrics = () => {
                                 <i className="fa fa-hands-helping fa-4x"></i>
                             </div>
                             <h6 className="text-uppercase">Volunteers</h6>
-                            <h1 className="display-4">125</h1>
+                            <h1 className="display-4">{volunteers + "+"}</h1>
                         </div>
                     </div>
                 </div>
@@ -43,8 +85,8 @@ const Metrics = () => {
                             <div className="rotate">
                                 <i className="fa fa-users fa-4x"></i>
                             </div>
-                            <h6 className="text-uppercase">Beneficiaries</h6>
-                            <h1 className="display-4">36</h1>
+                            <h6 className="text-uppercase">Donors</h6>
+                            <h1 className="display-4">{beneficiaries + "+"}</h1>
                         </div>
                     </div>
                 </div>
