@@ -120,6 +120,7 @@ const RequestListing = ({ dashboardView, handleLocationClick }) => {
     };
 
     const handlePending = (requestId, status) => {
+        console.log('handlePending function called');
         if (userRole === "recipient" && status === "pending") {
             const db = getDatabase();
             const requestRef = ref(db, `donationRequests/${requestId}`);
@@ -235,7 +236,7 @@ const RequestListing = ({ dashboardView, handleLocationClick }) => {
             <div className="row">
                 {!dashboardView && <DonationHeader />}
                 <div className={'col-md-12 pt-3'}>
-                {dashboardView && (
+                    {dashboardView && (
                         <h5 className="title mb-3 text-secondary" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             Donation Requests
                             {userRole === "donor" && (
@@ -419,6 +420,7 @@ const RequestListing = ({ dashboardView, handleLocationClick }) => {
                                             )}
                                             {userRole === "recipient" && (
                                                 <div className="btn-group" role="group">
+                                                    {console.log('Button rendering')}
                                                     <button
                                                         type="button"
                                                         className={`btn ${data.status === "pending"
@@ -430,7 +432,6 @@ const RequestListing = ({ dashboardView, handleLocationClick }) => {
                                                                     : ""
                                                             }`}
                                                         onClick={() => handlePending(data.requestId, data.status)}
-                                                        disabled={data.status === "pending"}
 
                                                     >
                                                         {getStatusButtonText(data.status)}

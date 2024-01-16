@@ -37,7 +37,7 @@ export default function WhatWeDo({ id }) {
                                     <h5 className="card-title">We Bring Smile</h5>
                                     <p style={{
                                         padding: 0
-                                    }} className="card-text">Fueling Smiles, Nourishing Souls: Our Passionate Drive to Alleviate Hunger, Embrace Unity, and Paint Brighter Tomorrows Through Food Donation. </p>
+                                    }} className="card-text">Fueling Smiles, Nourishing Souls: Our Passionate Drive to Alleviate Hunger, Embrace Unity, Compassion and Paint Brighter Tomorrows Through Food Donation. </p>
                                 </div>
                             </div>
                         </div>

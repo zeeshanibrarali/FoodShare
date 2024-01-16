@@ -5,7 +5,8 @@ const barOptions = {
     maintainAspectRatio: false,
 };
 
-export default function Chart({ foodTypeData}) {
+export default function Chart({ foodTypeData, counts}) {
+    console.log(counts);
     const data = {
         labels: ['Canned Food', 'Fresh Produce', 'Packaged Meals', 'Fruits & Vegetables', 'Bakery Items', 'Beverages', 'Baby Food'],
         datasets: [
@@ -41,7 +42,7 @@ export default function Chart({ foodTypeData}) {
         datasets: [
             {
                 label: 'Number of users',
-                data: [6,2,3],
+                data: counts,
                 backgroundColor: [
                     'pink',
                     '#17a2b8',

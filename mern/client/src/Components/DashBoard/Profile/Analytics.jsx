@@ -5,6 +5,7 @@ import { getDatabase, ref, onValue, update } from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import EditProfileForm from './EditProfileModal';
 import Footer from '../../Footer/footer';
+import { getRoleCounts } from '../../../config/rolecount-config';
 
 const Analytics = () => {
     const [userInfo, setUserInfo] = useState({
@@ -28,6 +29,14 @@ const Analytics = () => {
         totalFoodItemsDelivered: 0,
         foodTypeCounts: Array(7).fill(0),
     });
+    const [counts, setCounts] = useState([]);
+    useEffect(() => {
+        getRoleCounts((countsArray) => {
+            console.log('Received Counts Array:', countsArray);
+            setCounts(countsArray);
+        });
+    }, []);
+
 
     const fetchDonationData = () => {
         const db = getDatabase();
@@ -44,24 +53,21 @@ const Analytics = () => {
             const foodTypeCounts = Array(7).fill(0);
 
             if (donationData) {
+                console.log(donationData);
                 Object.values(donationData).forEach((request) => {
                     if (request.userId === userId) {
                         donatedWeight += parseFloat(request.foodWeight) || 0;
                         totalFoodItemsDonated += parseInt(request.foodQuantity) || 0;
-                    } else if (request.receivedby === userId) {
+                        updateFoodTypeCounts(request, foodTypeCounts);
+                    } else if (request.receivedBy === userId) {
                         receivedWeight += parseFloat(request.foodWeight) || 0;
                         totalFoodItemsReceived += parseInt(request.foodQuantity) || 0;
-                    } else if (request.deliveredby === userId) {
+                        updateFoodTypeCounts(request, foodTypeCounts);
+                    } else if (request.deliveredBy === userId) {
+                        console.log("wow");
                         deliveredWeight += parseFloat(request.foodWeight) || 0;
                         totalFoodItemsDelivered += parseInt(request.foodQuantity) || 0;
-                    }
-
-                    if (request.foodType) {
-                        const foodType = request.foodType || 'Other';
-                        const index = ['Canned Food', 'Fresh Produce', 'Packaged Meals', 'Fruits & Vegetables', 'Bakery Items', 'Beverages', 'Baby Food'].indexOf(foodType);
-                        if (index !== -1) {
-                            foodTypeCounts[index] += parseInt(request.foodQuantity) || 0;
-                        }
+                        updateFoodTypeCounts(request, foodTypeCounts);
                     }
                 });
             }
@@ -81,6 +87,16 @@ const Analytics = () => {
                 foodTypeCounts,
             });
         });
+    };
+
+    const updateFoodTypeCounts = (request, foodTypeCounts) => {
+        if (request.foodType) {
+            const foodType = request.foodType || 'Other';
+            const index = ['Canned Food', 'Fresh Produce', 'Packaged Meals', 'Fruits & Vegetables', 'Bakery Items', 'Beverages', 'Baby Food'].indexOf(foodType);
+            if (index !== -1) {
+                foodTypeCounts[index] += parseInt(request.foodQuantity) || 0;
+            }
+        }
     };
 
     const handleEditClick = () => {
@@ -226,13 +242,13 @@ const Analytics = () => {
                                                         {userInfo.userRole === "Recipient" && (
                                                             <div className="food-info-box">
                                                                 <p style={{ fontSize: "20px" }}><strong>Food Received Weight:</strong> {foodInfo.receivedWeight} kg</p>
-                                                                <p style={{ fontSize: "20px" }}><strong>Food Received Items:</strong> {foodInfo.totalFoodItemsReceived} kg</p>
+                                                                <p style={{ fontSize: "20px" }}><strong>Food Received Items:</strong> {foodInfo.totalFoodItemsReceived} +</p>
                                                             </div>
                                                         )}
                                                         {userInfo.userRole === "Volunteer" && (
                                                             <div className="food-info-box">
                                                                 <p style={{ fontSize: "20px" }}><strong>Food Delivered Weight:</strong> {foodInfo.deliveredWeight} kg</p>
-                                                                <p style={{ fontSize: "20px" }}><strong>Food Delivered Items:</strong> {foodInfo.totalFoodItemsDelivered} kg</p>
+                                                                <p style={{ fontSize: "20px" }}><strong>Food Delivered Items:</strong> {foodInfo.totalFoodItemsDelivered} +</p>
                                                             </div>
                                                         )}
                                                     </p>
@@ -292,7 +308,7 @@ const Analytics = () => {
                             <div className="row mt-5">
                                 <div className="col-md-12">
                                     <h2 className='title mb-3 text-center text-secondary '>{userInfo.userName}'s Analytics</h2>
-                                    <Chart foodTypeData={foodInfo.foodTypeCounts} />
+                                    <Chart foodTypeData={foodInfo.foodTypeCounts} counts={counts} />
                                 </div>
                             </div>
                         </main>
