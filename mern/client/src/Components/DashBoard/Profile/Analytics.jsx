@@ -26,6 +26,7 @@ const Analytics = () => {
         totalFoodItemsDonated: 0,
         totalFoodItemsReceived: 0,
         totalFoodItemsDelivered: 0,
+        foodTypeCounts: Array(7).fill(0),
     });
 
     const fetchDonationData = () => {
@@ -40,6 +41,7 @@ const Analytics = () => {
             let totalFoodItemsDonated = 0;
             let totalFoodItemsReceived = 0;
             let totalFoodItemsDelivered = 0;
+            const foodTypeCounts = Array(7).fill(0);
 
             if (donationData) {
                 Object.values(donationData).forEach((request) => {
@@ -53,12 +55,21 @@ const Analytics = () => {
                         deliveredWeight += parseFloat(request.foodWeight) || 0;
                         totalFoodItemsDelivered += parseInt(request.foodQuantity) || 0;
                     }
+
+                    if (request.foodType) {
+                        const foodType = request.foodType || 'Other';
+                        const index = ['Canned Food', 'Fresh Produce', 'Packaged Meals', 'Fruits & Vegetables', 'Bakery Items', 'Beverages', 'Baby Food'].indexOf(foodType);
+                        if (index !== -1) {
+                            foodTypeCounts[index] += parseInt(request.foodQuantity) || 0;
+                        }
+                    }
                 });
             }
 
             console.log("Donated Weight:", donatedWeight);
             console.log("Received Weight:", receivedWeight);
             console.log("Delivered Weight:", deliveredWeight);
+            console.log("Food Type Counts:", foodTypeCounts);
 
             setFoodInfo({
                 donatedWeight,
@@ -67,6 +78,7 @@ const Analytics = () => {
                 totalFoodItemsDonated,
                 totalFoodItemsReceived,
                 totalFoodItemsDelivered,
+                foodTypeCounts,
             });
         });
     };
@@ -105,6 +117,7 @@ const Analytics = () => {
 
                     console.log(userData);
                     if (userData && userData.first_name) {
+
                         setUserInfo({
                             userName: capitalizeFirstLetter(userData.first_name),
                             userRole: capitalizeFirstLetter(userData.account_type),
@@ -133,7 +146,9 @@ const Analytics = () => {
                     totalFoodItemsDonated: 0,
                     totalFoodItemsReceived: 0,
                     totalFoodItemsDelivered: 0,
+                    foodTypeCounts: Array(7).fill(0),
                 });
+                setRoleCounts([0, 0, 0]);
             }
         });
         return () => unsubscribe();
@@ -149,6 +164,7 @@ const Analytics = () => {
                 <div className="row">
                     <NavigateSidebar userName={userInfo.userName} />
                     <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
                         {/* User Information */}
                         <div className="row mt-2 ">
                             <div className="col-md-12">
@@ -225,9 +241,6 @@ const Analytics = () => {
 
                                         </div>
                                     </div>
-
-
-
                                 )}
                             </div>
                         </div>
@@ -279,7 +292,7 @@ const Analytics = () => {
                             <div className="row mt-5">
                                 <div className="col-md-12">
                                     <h2 className='title mb-3 text-center text-secondary '>{userInfo.userName}'s Analytics</h2>
-                                    <Chart />
+                                    <Chart foodTypeData={foodInfo.foodTypeCounts} />
                                 </div>
                             </div>
                         </main>

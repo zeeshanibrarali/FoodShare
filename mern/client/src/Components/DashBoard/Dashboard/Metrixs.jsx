@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const Metrics = () => {
 
@@ -32,7 +31,6 @@ const Metrics = () => {
             console.log(usersData);
 
             if (usersData) {
-                // Count volunteers and beneficiaries
                 const totalVolunteers = Object.values(usersData).filter(user => user.account_type === 'volunteer').length;
                 const totalBeneficiaries = Object.values(usersData).filter(user => user.account_type === 'donor').length;
 
