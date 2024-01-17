@@ -79,6 +79,15 @@ The Profile component in FoodShare is responsible for displaying user analytics,
 ## Interfaces
 
 <table>
+ <tr> Home
+    <td><img src="./ScreenShots/home.PNG" alt="Image 1" width="300" height="200"></td>
+    <td><img src="./ScreenShots/home2.PNG" alt="Image 2" width="300" height="200"></td>
+    <td><img src="./ScreenShots/home3.PNG" alt="Image 2" width="300" height="200"></td>
+  </tr>
+  <tr> Desktop
+    <td><img src="./ScreenShots/desktop.PNG" alt="Image 1" width="300" height="200"></td>
+    <td><img src="./ScreenShots/desktop2.PNG" alt="Image 2" width="300" height="200"></td>
+  </tr>
   <tr> Desktop
     <td><img src="./ScreenShots/desktop.PNG" alt="Image 1" width="300" height="200"></td>
     <td><img src="./ScreenShots/desktop2.PNG" alt="Image 2" width="300" height="200"></td>
