@@ -11,6 +11,7 @@ The FoodShare platform is designed to provide a seamless digital interface for r
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Components](#components)
+- [Interfaces](#interfaces)
 - [Contributing](#contributing)
 
 ## Introduction
@@ -75,6 +76,14 @@ The Donation component in FoodShare handles the display of donation requests. It
 ### Profile Component
 The Profile component in FoodShare is responsible for displaying user analytics, including personal information, food donation and receipt statistics, and educational content. This component utilizes charts to represent data and provides users with insights into their contributions and activities within the FoodShare platform.
 
+## Interfaces
+
+<table>
+  <tr>
+    <td><img src="./ScreenShots/desktop.PNG" alt="Image 1" width="300" height="200"></td>
+    <td><img src="./ScreenShots/desktop2.PNG" alt="Image 2" width="300" height="200"></td>
+  </tr>
+</table>
 
 ## Contributing
 We welcome contributions from the community! To contribute to the FoodShare project, please follow these guidelines:
