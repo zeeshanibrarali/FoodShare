@@ -12,7 +12,6 @@ The FoodShare platform is designed to provide a seamless digital interface for r
 - [Usage](#usage)
 - [Components](#components)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
