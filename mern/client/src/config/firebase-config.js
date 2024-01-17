@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_GOOGLE_FIREBASE_API_KEY,
@@ -10,7 +9,6 @@ const firebaseConfig = {
     appId: "1:161209538695:web:f1284f8528a3db7902c022",
     measurementId: "G-HNWL05NBFD"
   };
-  
+
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-//   const analytics = getAnalytics(app);
