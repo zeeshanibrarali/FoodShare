@@ -30,6 +30,8 @@ const Analytics = () => {
         foodTypeCounts: Array(7).fill(0),
     });
     const [counts, setCounts] = useState([]);
+    const [labelText, setLabelText] = useState("");
+
     useEffect(() => {
         getRoleCounts((countsArray) => {
             console.log('Received Counts Array:', countsArray);
@@ -59,15 +61,18 @@ const Analytics = () => {
                         donatedWeight += parseFloat(request.foodWeight) || 0;
                         totalFoodItemsDonated += parseInt(request.foodQuantity) || 0;
                         updateFoodTypeCounts(request, foodTypeCounts);
+                        setLabelText("Donated Food Type Items");
                     } else if (request.receivedBy === userId) {
                         receivedWeight += parseFloat(request.foodWeight) || 0;
                         totalFoodItemsReceived += parseInt(request.foodQuantity) || 0;
                         updateFoodTypeCounts(request, foodTypeCounts);
+                        setLabelText("Received Food Type Items");
                     } else if (request.deliveredBy === userId) {
                         console.log("wow");
                         deliveredWeight += parseFloat(request.foodWeight) || 0;
                         totalFoodItemsDelivered += parseInt(request.foodQuantity) || 0;
                         updateFoodTypeCounts(request, foodTypeCounts);
+                        setLabelText("Delivered Food Type Items");
                     }
                 });
             }
@@ -76,6 +81,7 @@ const Analytics = () => {
             console.log("Received Weight:", receivedWeight);
             console.log("Delivered Weight:", deliveredWeight);
             console.log("Food Type Counts:", foodTypeCounts);
+            console.log(labelText);
 
             setFoodInfo({
                 donatedWeight,
@@ -308,7 +314,7 @@ const Analytics = () => {
                             <div className="row mt-5">
                                 <div className="col-md-12">
                                     <h2 className='title mb-3 text-center text-secondary '>{userInfo.userName}'s Analytics</h2>
-                                    <Chart foodTypeData={foodInfo.foodTypeCounts} counts={counts} />
+                                    <Chart foodTypeData={foodInfo.foodTypeCounts} counts={counts} labelText={labelText} />
                                 </div>
                             </div>
                         </main>
