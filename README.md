@@ -95,6 +95,15 @@ The Profile component in FoodShare is responsible for displaying user analytics,
   </tr>
 </table>
 
+### Profile
+
+<table>
+ <tr> 
+    <td><img src="./ScreenShots/profile.PNG" alt="Image 1" width="250" height="200"></td>
+    <td><img src="./ScreenShots/profile2.PNG" alt="Image 2" width="250" height="200"></td>
+  </tr>
+</table>
+
 ### Authentication
 
 <table>

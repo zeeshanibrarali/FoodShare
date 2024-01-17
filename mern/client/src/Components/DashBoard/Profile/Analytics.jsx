@@ -240,7 +240,7 @@ const Analytics = () => {
                                                     <p style={{ fontWeight: "bold", color: "#fff" }}>
                                                         {userInfo.userRole === "Donor" && (
                                                             <div className="food-info-box p-1">
-                                                                <p style={{ fontSize: "20px" }}><strong>Food Donated Weight:</strong> {foodInfo.donatedWeight} kg</p>
+                                                                <p style={{ fontSize: "20px" }}><strong>Food Donated Weight:</strong> {foodInfo.donatedWeight} kg </p>
                                                                 <p style={{ fontSize: "20px" }}><strong>Food Donated Items:</strong> {foodInfo.totalFoodItemsDonated} +</p>
                                                             </div>
 
