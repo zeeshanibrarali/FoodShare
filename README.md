@@ -78,21 +78,45 @@ The Profile component in FoodShare is responsible for displaying user analytics,
 
 ## Interfaces
 
+### Home
 <table>
- <tr> Home
+ <tr> 
     <td><img src="./ScreenShots/home.PNG" alt="Image 1" width="300" height="200"></td>
-    <td><img src="./ScreenShots/home2.PNG" alt="Image 2" width="300" height="200"></td>
     <td><img src="./ScreenShots/home3.PNG" alt="Image 2" width="300" height="200"></td>
   </tr>
-  <tr> Desktop
-    <td><img src="./ScreenShots/desktop.PNG" alt="Image 1" width="300" height="200"></td>
-    <td><img src="./ScreenShots/desktop2.PNG" alt="Image 2" width="300" height="200"></td>
-  </tr>
-  <tr> Desktop
+</table>
+
+### Desktop 
+
+<table>
+ <tr> 
     <td><img src="./ScreenShots/desktop.PNG" alt="Image 1" width="300" height="200"></td>
     <td><img src="./ScreenShots/desktop2.PNG" alt="Image 2" width="300" height="200"></td>
   </tr>
 </table>
+
+### Authentication
+
+<table>
+ <tr> 
+    <td><img src="./ScreenShots/login.PNG" alt="Image 1" width="300" height="200"></td>
+    <td><img src="./ScreenShots/register.PNG" alt="Image 2" width="300" height="200"></td>
+  </tr>
+</table>
+
+### Personal Info Page/Donation Page
+
+<table>
+ <tr> 
+    <td><img src="./ScreenShots/personalinfo.PNG" alt="Image 1" width="300" height="200"></td>
+    <td><img src="./ScreenShots/donation.PNG" alt="Image 2" width="300" height="200"></td>
+  </tr>
+</table>
+
+## Authors
+
+- **Zeeshan Ibrar:** Firebase Auth, Firebase Realtime Database, Googles Map Api (backend)
+- **Abdul Haseeb Alam:** React.js (Frontend)
 
 ## Contributing
 We welcome contributions from the community! To contribute to the FoodShare project, please follow these guidelines:
@@ -102,4 +126,6 @@ We welcome contributions from the community! To contribute to the FoodShare proj
 - Commit your changes: **git commit -m 'Add a new feature'.**
 - Push to the branch: **git push origin feature/your-feature.**
 - Submit a pull request.
+
+
 
